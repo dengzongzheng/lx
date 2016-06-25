@@ -4,15 +4,16 @@ import {
     StyleSheet,
     Text,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native'
 
 'use strict';
 import Util from './Util'
 import Header from './Header'
 import Banner from './Banner'
-
-
+import TabList from './TabList'
+import Floor from './Floor'
 const banner ={
     "groupAttrList": [
         {
@@ -81,7 +82,111 @@ const banner ={
     "columNum": 0
 };
 
+const tabList= {
+    "groupAttrList": [
+        {
+            "id": 88478,
+            "name": "家居",
+            "title": "家居",
+            "redirectPath": "",
+            "desc": "新房二手房租房",
+            "type": 1,
+            "redirectType": 16,
+            "imgPath": "http://image1.jyall.com/v1/tfs/T183J_B4xT1RCvBVdK"
+        },
+        {
+            "id": 88481,
+            "name": "家装",
+            "title": "家装",
+            "redirectPath": "",
+            "desc": "家装",
+            "type": 1,
+            "redirectType": 7,
+            "imgPath": "http://image1.jyall.com/v1/tfs/T19sE_BCLT1RCvBVdK"
+        },
+        {
+            "id": 88484,
+            "name": "家电",
+            "title": "家电",
+            "redirectPath": "",
+            "desc": "家电大放送",
+            "type": 1,
+            "redirectType": 3,
+            "imgPath": "http://image1.jyall.com/v1/tfs/T1cib_BKxT1RCvBVdK"
+        },
+        {
+            "id": 88487,
+            "name": "家具",
+            "title": "家具",
+            "redirectPath": "",
+            "desc": "家具特色活动",
+            "type": 1,
+            "redirectType": 4,
+            "imgPath": "http://image1.jyall.com/v1/tfs/T1kfb_BKbT1RCvBVdK"
+        },
+        {
+            "id": 88490,
+            "name": "家政",
+            "title": "家政",
+            "redirectPath": "",
+            "desc": "家政服务",
+            "type": 1,
+            "redirectType": 6,
+            "imgPath": "http://image1.jyall.com/v1/tfs/T17fV_BvCT1RCvBVdK"
+        }
+    ],
+        "groupBlock": "tabList",
+        "groupName": "首页tab",
+        "columNum": 1
+};
 
+let houseIntr={
+    "groupAttrList": [
+        {
+            "id": 88448,
+            "name": "铂铭郡",
+            "title": "铂铭郡",
+            "redirectPath": "100",
+            "desc": "南北通透",
+            "type": 1,
+            "redirectType": 22,
+            "imgPath": "http://image1.jyall.com/v1/tfs/T18yhTBXVT1RCvBVdK"
+        },
+        {
+            "id": 88451,
+            "name": "摩尔公馆",
+            "title": "摩尔公馆",
+            "redirectPath": "267",
+            "desc": "交通便利",
+            "type": 1,
+            "redirectType": 22,
+            "imgPath": "http://image1.jyall.com/v1/tfs/T1pQV_B5Lv1RCvBVdK"
+        },
+        {
+            "id": 88454,
+            "name": "北京壹号院",
+            "title": "北京壹号院",
+            "redirectPath": "545",
+            "desc": "交通便利",
+            "type": 1,
+            "redirectType": 22,
+            "imgPath": "http://image1.jyall.com/v1/tfs/T1mQb_BsxT1RCvBVdK"
+        },
+        {
+            "id": 88457,
+            "name": "新房0佣金",
+            "title": "新房0佣金",
+            "redirectPath": "",
+            "desc": "新房0佣金",
+            "type": 1,
+            "redirectType": 28,
+            "imgPath": "http://image1.jyall.com/v1/tfs/T1rrW_B4Zv1RCvBVdK"
+        }
+    ],
+        "groupBlock": "houseIntr",
+        "groupName": "新房广场",
+        "columNum": 2
+};
 export default class extends Component {
 
     // 构造
@@ -93,9 +198,44 @@ export default class extends Component {
 
     render(){
         return (
-            <View>
+            <View style={[styles.flex_column]}>
                 <Header />
-                <Banner banners={banner.groupAttrList}/>
+                <ScrollView style={[styles.flex_column]}>
+                    <View style={[styles.flex_column]}>
+                        <Banner banners={banner.groupAttrList}/>
+                        <TabList tabList={tabList.groupAttrList}/>
+                    </View>
+                    <View style={[styles.flex_column]}>
+
+                        <View style={[styles.flex_column,styles.floorTitle]}>
+                            <View style={[styles.flex_row]}>
+                                <View style={[styles.flex_row]}>
+                                    <Text style={[styles.floorHeader]}>{houseIntr.groupName}</Text>
+                                    <Text style={[styles.more]}>更多</Text>
+                                </View>
+                            </View>
+                        </View>
+
+                        <View style={[styles.flex_row,{flex:2}]}>
+                            <View style={[styles.flex_row]}>
+                                <Image source={{uri:houseIntr.groupAttrList[0].imgPath}} style={[styles.leftImage]}/>
+                            </View>
+                            <View style={[styles.flex_column]}>
+                                <View style={[styles.flex_column]}>
+                                    <Image source={{uri:houseIntr.groupAttrList[1].imgPath}} style={[styles.rightImage]}/>
+                                </View>
+                                <View style={[styles.flex_column]}>
+                                    <Image source={{uri:houseIntr.groupAttrList[2].imgPath}} style={[styles.rightImage]}/>
+                                </View>
+                            </View>
+                        </View>
+
+                        <View style={[styles.flex_column]}>
+                           <Image source={{uri:houseIntr.groupAttrList[3].imgPath}} style={[styles.bottomImage]}/>
+                        </View>
+                    </View>
+                </ScrollView>
+                
             </View>
         )
     }
@@ -104,6 +244,42 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
 
+    flex_row:{
+        flex:1,
+        flexDirection:'row'
+    },
+    flex_column:{
+        flex:1,
+        flexDirection:'column'
+    },
+
+    floorTitle:{
+      marginBottom:10
+    },
+    floorHeader:{
+
+    },
+    more:{
+
+    },
+    leftImage:{
+        width:Util.size.width/2,
+        height:Util.size.height/2-(2*(Util.size.height/2)/4)+2,
+        resizeMode:'cover',
+        marginRight:3,
+        marginBottom:10
+    },
+    bottomImage:{
+        width:Util.size.width,
+        resizeMode:'contain',
+        height:80
+    },
+    rightImage:{
+        width:Util.size.width/2,
+        height:(Util.size.height/2)/4,
+        resizeMode:'cover',
+        marginLeft:3
+    }
 
 
 });
