@@ -13,14 +13,14 @@ import {
 import Util from './view/util/Util'
 import Main from './view/Main'
 import Activity from './view/Activity'
-
+import Home from './jsjyw/Home/Home'
 class lx extends Component {
     render() {
         return (
             <NavigatorIOS
                 initialRoute={{
                   title:"",
-                  component: Main,
+                  component: Home,
                   navigationBarHidden:true
                 }}
                 itemWrapperStyle={styles.itemWrapper}
@@ -62,7 +62,7 @@ class lx2 extends Component{
             <Navigator
                 style= {styles.container}
                 initialRoute= {{
-                  component: Main,
+                  component: Home,
                   name: 'home'
                 }}
                 configureScene={() => {

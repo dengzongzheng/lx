@@ -6,7 +6,8 @@ import {
     View,
     ScrollView,
     TouchableOpacity,
-    Text
+    Text,
+    ListView
 } from 'react-native'
 
 'use strict';
@@ -17,11 +18,12 @@ export default class extends Component{
 
     // 构造
     constructor(props) {
+
+        let ds = new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2});
         super(props);
         // 初始状态
         this.state = {
-            animating:true,
-            control:'不显示'
+            dataSource:ds.cloneWithRows(['dzz','qm'])
         };
         this.back = this.back.bind(this);
     }
@@ -38,35 +40,29 @@ export default class extends Component{
         })
     }
 
+    renderRow(rowData){
+        return(
+            <View>
+                <Text>{rowData}</Text>
+            </View>
+        )
+    }
 
     render(){
 
         return(
-            <ScrollView>
-                <HeaderUtil back={this.back} title="活动指示器"/>
+            <View>
+                <HeaderUtil back={this.back} title="列表控件"/>
 
                 <View style={[styles.boxContainer]}>
-                    <ActivityIndicatorIOS
-                        animating={this.state.animating}
-                        size="large"
-                        color='red'
-                    />
-                    <TouchableOpacity  onPress={()=>this.control()} style={[styles.control]}>
-                        <Text>{this.state.control}</Text>
-                    </TouchableOpacity>
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={this.renderRow}
+                />
+
                 </View>
 
-                <View style={[styles.boxContainer]}>
-                    <ActivityIndicatorIOS
-                        animating={this.state.animating}
-                        size="small"
-                    />
-                    <TouchableOpacity  onPress={()=>this.control()} style={[styles.control]}>
-                        <Text>{this.state.control}</Text>
-                    </TouchableOpacity>
-                </View>
-
-            </ScrollView>
+            </View>
         )
 
     }
@@ -76,7 +72,7 @@ export default class extends Component{
 const styles = StyleSheet.create({
 
     boxContainer:{
-        height:100,
+        height:Util.size.height,
         width:Util.size.width,
         borderBottomWidth:Util.pixel,
         borderBottomColor:'black'

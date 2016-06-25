@@ -15,11 +15,12 @@ import {
 
 import Util from './util/Util'
 import Header from './Header'
-import Icon from 'react-native-vector-icons/Ionicons';
-import IconFA from 'react-native-vector-icons/FontAwesome';
-import Swiper from 'react-native-swiper';
+import Icon from 'react-native-vector-icons/Ionicons'
+import IconFA from 'react-native-vector-icons/FontAwesome'
+import Swiper from 'react-native-swiper'
 import Activity from './Activity'
-
+import Images from './Image'
+import ListViews from './ListView'
 
 export default class extends Component{
 
@@ -41,8 +42,8 @@ export default class extends Component{
                     hideNav: false,
                 },{
                     key:1,
-                    title:"A weather app",
-                    component: '',
+                    title:"图片控件",
+                    component: Images,
                     isFA: false,
                     icon: "ios-partlysunny",
                     size:60,
@@ -50,10 +51,10 @@ export default class extends Component{
                     hideNav: true,
                 },{
                     key:2,
-                    title:"twitter",
-                    component: '',
+                    title:"ListView",
+                    component: ListViews,
                     isFA: false,
-                    icon: "social-twitter",
+                    icon: "ListViews",
                     size:50,
                     color:"#2aa2ef",
                     hideNav: true,
