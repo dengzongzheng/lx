@@ -41,21 +41,6 @@ class lx2 extends Component{
         this.state = {};
     }
 
-    renderScene(route, nav) {
-        switch (route.id) {
-            case 'Activity':
-                return <Activity navigator={nav}/>;
-            case 'breadcrumbs':
-                return <BreadcrumbNavSample navigator={nav}/>;
-            case 'jumping':
-                return <JumpingNavSample navigator={nav}/>;
-            default:
-                return (
-                    <Main
-                    />
-                );
-        }
-    }
 
     render(){
         return (
@@ -77,29 +62,7 @@ class lx2 extends Component{
             </Navigator>
         )
     }
-    _setNavigatorRef(navigator) {
-        if (navigator !== this._navigator) {
-            this._navigator = navigator;
-
-            if (navigator) {
-                var callback = (event) => {
-                    console.log(
-                        `TabBarExample: event ${event.type}`,
-                        {
-                            route: JSON.stringify(event.data.route),
-                            target: event.target,
-                            type: event.type,
-                        }
-                    );
-                };
-                // Observe focus change events from the owner.
-                this._listeners = [
-                    navigator.navigationContext.addListener('willfocus', callback),
-                    navigator.navigationContext.addListener('didfocus', callback),
-                ];
-            }
-        }
-    }
+    
 
 }
 
