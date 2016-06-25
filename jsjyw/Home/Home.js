@@ -206,33 +206,7 @@ export default class extends Component {
                         <TabList tabList={tabList.groupAttrList}/>
                     </View>
                     <View style={[styles.flex_column]}>
-
-                        <View style={[styles.flex_column,styles.floorTitle]}>
-                            <View style={[styles.flex_row]}>
-                                <View style={[styles.flex_row]}>
-                                    <Text style={[styles.floorHeader]}>{houseIntr.groupName}</Text>
-                                    <Text style={[styles.more]}>更多</Text>
-                                </View>
-                            </View>
-                        </View>
-
-                        <View style={[styles.flex_row,{flex:2}]}>
-                            <View style={[styles.flex_row]}>
-                                <Image source={{uri:houseIntr.groupAttrList[0].imgPath}} style={[styles.leftImage]}/>
-                            </View>
-                            <View style={[styles.flex_column]}>
-                                <View style={[styles.flex_column]}>
-                                    <Image source={{uri:houseIntr.groupAttrList[1].imgPath}} style={[styles.rightImage]}/>
-                                </View>
-                                <View style={[styles.flex_column]}>
-                                    <Image source={{uri:houseIntr.groupAttrList[2].imgPath}} style={[styles.rightImage]}/>
-                                </View>
-                            </View>
-                        </View>
-
-                        <View style={[styles.flex_column]}>
-                           <Image source={{uri:houseIntr.groupAttrList[3].imgPath}} style={[styles.bottomImage]}/>
-                        </View>
+                        <Floor />
                     </View>
                 </ScrollView>
                 
@@ -251,35 +225,5 @@ const styles = StyleSheet.create({
     flex_column:{
         flex:1,
         flexDirection:'column'
-    },
-
-    floorTitle:{
-      marginBottom:10
-    },
-    floorHeader:{
-
-    },
-    more:{
-
-    },
-    leftImage:{
-        width:Util.size.width/2,
-        height:Util.size.height/2-(2*(Util.size.height/2)/4)+2,
-        resizeMode:'cover',
-        marginRight:3,
-        marginBottom:10
-    },
-    bottomImage:{
-        width:Util.size.width,
-        resizeMode:'contain',
-        height:80
-    },
-    rightImage:{
-        width:Util.size.width/2,
-        height:(Util.size.height/2)/4,
-        resizeMode:'cover',
-        marginLeft:3
     }
-
-
 });
