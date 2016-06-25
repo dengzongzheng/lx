@@ -3,7 +3,8 @@ import React, {Component} from 'react'
 import {
     ActivityIndicatorIOS,
     StyleSheet,
-    View
+    View,
+    ScrollView
 } from 'react-native'
 
 export default class extends Component{
@@ -20,10 +21,12 @@ export default class extends Component{
     render(){
 
         return(
-            <ActivityIndicatorIOS
-               animating={this.state.animating}
-               size="large"
-            />
+            <ScrollView>
+                <ActivityIndicatorIOS
+                    animating={this.state.animating}
+                    size="large"
+                />
+            </ScrollView>
         )
 
     }

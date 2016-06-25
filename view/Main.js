@@ -7,7 +7,8 @@ import {
     Image,
     TouchableOpacity,
     ScrollView,
-    NavigatorIOS
+    NavigatorIOS,
+    Navigator
 } from 'react-native'
 
 'use strict';
@@ -307,9 +308,8 @@ export default class extends Component{
 
     _jumpTo(index){
         this.props.navigator.push({
-            title: 'aaa',
-            component: Activity,
-            navigationBarHidden: true
+            name:'activity',
+            component:this.state.lxs[index].component
         });
     }
 
@@ -333,7 +333,7 @@ export default class extends Component{
                 <Swiper height={80} showsButtons={false} autoplay={true}>
                     <TouchableOpacity>
                       <View style={[styles.flex_row]}>
-                          <Image source={{uri:'http://dimg04.c-ctrip.com/images/700q050000000omzfD5A6_750_150_21.jpg'}} style={[styles.image]}/>
+                          <Image source={{uri:'http://image1.jyall.com/v1/tfs/T1llL_ByAv1RCvBVdK'}} style={[styles.image]}/>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity>
