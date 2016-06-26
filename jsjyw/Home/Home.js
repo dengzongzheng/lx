@@ -302,6 +302,7 @@ export default class extends Component {
                         icon={require('./images/TabBar/tabbar_one.imageset/tabbar_one.png')}
                         selectedIcon={require('./images/TabBar/tabbar_one_selected.imageset/tabbar_one_selected.png')}
                         tintColor="red"
+                        renderAsOriginal
                     >
                         <ScrollView style={[styles.flex_column]}>
                             <View style={[styles.flex_column]}>
