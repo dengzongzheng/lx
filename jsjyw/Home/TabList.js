@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         resizeMode:'contain'
     },
     tabContainer:{
-        height:100
+        height:80
     },
     tabText:{
         textAlign:'center'

@@ -37,7 +37,7 @@ export default class extends Component {
 
         return (
             <View style={[styles.container]}>
-                <Swiper height={100} showsButtons={false} autoplay={true}>
+                <Swiper height={120} showsButtons={false} autoplay={true}>
                     {swiper}
                 </Swiper>
 
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     container:{
     },
     swiper_iamge:{
-        height:100,
+        height:120,
         width:Util.size.width,
         resizeMode:'cover',
         justifyContent:'center',
