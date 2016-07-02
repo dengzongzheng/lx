@@ -30,7 +30,7 @@ export default class extends Component {
             <View style={[styles.container]}>
                  <Header />
                  <Condition />
-                {this.state.tab_selected=="NewHouse"?<NewHouse />:null}
+                {this.state.tab_selected=="NewHouse"?<View style={{flex:1}}><NewHouse /></View>:null}
             </View>
         )
     }
@@ -40,7 +40,6 @@ export default class extends Component {
 const styles = StyleSheet.create({
 
     container:{
-
     }
 
 

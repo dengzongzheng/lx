@@ -12,53 +12,38 @@ import {
 import Util from '../Home/Util'
 
 
-const data = {
-    "houseId": 604,
-    "realImg": "T1lrW_BbYT1RXrhCrK.jpg",
-    "title": "天恒世界集",
-    "position": "大兴-西红门",
-    "averagePrice": "32000",
-    "area": "46-102",
-    "tags": [
-        {
-            "tagName": "LOFT"
-        },
-        {
-            "tagName": "不限购"
-        }
-    ],
-    "privilege": "",
-    "ecCoorperate": "5万抵20万",
-    "housesLinkage": {
-        "houseId": 0,
-        "appShow": false,
-        "pcShow": false,
-        "title": "",
-        "appLink": "",
-        "pcLink": "",
-        "appImage": "",
-        "pcImage": ""
-    },
-    "downPayment": "73.6",
-    "addressDetail": "北京市大兴区广平大街与春和路交叉口南150米",
-    "longitude": null,
-    "latitude": null,
-    "introduction": " 天恒世界集项目是天恒集团2015年主力打造的新科住宅项目。总建筑面积186902㎡，其中地上建筑面积121252㎡，地下建筑面积65650㎡，容积率3.0.是西红门区域平层公寓和loft公寓共存的项目。\n *页面中所涉面积，如无特殊说明，均为建筑面积（重庆市项目为套内面积），所涉及装修状况、标准以最终合同为准。 ​",
-    "rooms": "1居 2居 3居 "
-};
-
 export default class extends Component {
 
     // 构造
     constructor(props) {
+        const dataSource = new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2});
         super(props);
         // 初始状态
-        this.state = {};
+        this.state = {
+            dataSource:dataSource,
+            loading:true
+        };
         this.goBack = this.goBack.bind(this);
+        this.renderRow = this.renderRow.bind(this);
     }
 
     goBack(){
         this.props.navigator.pop();
+    }
+
+    componentDidMount() {
+        const url = "http://m.jyall.com/jyhouse-api/v1/newHouse/getHouses?cityId=10002&pageSize=10&pageNo=1";
+        fetch(url).then((response)=>{
+           if(response.status==200){
+               response.json().then((responseData)=>{
+                   console.log(responseData.data);
+                  this.setState({
+                      dataSource:this.state.dataSource.cloneWithRows(responseData.data),
+                      loading:false
+                  });
+               });
+           }
+        });
     }
 
     renderRow (renderData){
@@ -107,47 +92,19 @@ export default class extends Component {
     }
 
     render() {
-        var tags = [];
-        for(var i in data.tags){
-            var tag = (
-              <View key={i} style={[styles.tag]}>
-                  <Text style={[styles.tag_text]}>{data.tags[i].tagName}</Text>
-              </View>
-            );
-            tags.push(tag);
+        if(this.state.loading){
+            return(
+                <View style={[styles.loading]}>
+                    <Text>loading......</Text>
+                </View>
+            )
         }
-        return (
-                <TouchableOpacity>
-                    <View style={[styles.container,styles.flex_row]}>
-                        <View style={[styles.flex_row,{flex:0.7}]}>
-                            <Image source={{uri:Util.tfsGetServer+data.realImg}} style={[styles.realImg]}/>
-                        </View>
-                        <View style={[styles.flex_column]}>
-                            <View style={[styles.flex_row]}>
-                                <View style={[styles.flex_row]}>
-                                    <Text style={styles.title} numberOfLines={1}>{data.title}</Text>
-                                </View>
-                                <View style={[styles.flex_row]}>
-                                    <Text style={[styles.price]}>{data.averagePrice}元/㎡</Text>
-                                </View>
-                            </View>
-                            <View style={[styles.flex_row]}>
-                                <View style={[styles.flex_row]}>
-                                    <Text style={styles.position} numberOfLines={1}>{data.position}</Text>
-                                </View>
-                                <View style={[styles.flex_row]}>
-                                    <Text style={[styles.area]}>{data.area}㎡</Text>
-                                </View>
-                            </View>
-                            <View style={[styles.flex_row]}>
-                                {tags}
-                            </View>
-                            <View style={[styles.flex_row]}>
-                                {data.ecCoorperate!=""?<View style={[styles.flex_row]}><Text style={[styles.tuan]}>团</Text><Text>{data.ecCoorperate}</Text></View>:null}
-                            </View>
-                        </View>
-                    </View>
-                </TouchableOpacity>
+        return(
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={this.renderRow}
+                    style={styles.listView}
+                />
         )
     }
 
@@ -222,6 +179,13 @@ const styles = StyleSheet.create({
         padding:3,
         height:20,
         marginRight:3
+    },
+    loading:{
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    listView:{
+        height:Util.size.height
     }
 
 });
