@@ -15,6 +15,8 @@ import Header from './Header'
 import Banner from './Banner'
 import TabList from './TabList'
 import Floor from './Floor'
+import Floor_JZ from './Floor_JZ'
+import Floor_JD from './Floor_JD'
 
 export default class extends Component {
 
@@ -47,6 +49,8 @@ export default class extends Component {
                                 <Floor houseIntr={this.props.datas.houseIntr}/>
                                 <Floor houseIntr={this.props.datas.secondHouse}/>
                                 <Floor houseIntr={this.props.datas.CZHouse}/>
+                                <Floor_JZ houseMagic={this.props.datas.houseMagic}/>
+                                <Floor_JD houseElectrical={this.props.datas.houseElectrical} />
                             </View>
                         </ScrollView>
                     </TabBarIOS.Item>

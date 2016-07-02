@@ -49,7 +49,6 @@ class lx2 extends Component{
         fetch(url).then((response)=>{
             if(response.status==200){
                 response.json().then((responseData)=>{
-                    console.log(responseData);
                    this.setState({
                        datas:responseData,
                        loading:false
