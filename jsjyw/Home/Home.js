@@ -15,8 +15,9 @@ import Header from './Header'
 import Banner from './Banner'
 import TabList from './TabList'
 import Floor from './Floor'
-import Floor_JZ from './Floor_JZ'
-import Floor_JD from './Floor_JD'
+import Floor_JZhuang from './Floor_JZhuang'
+import Floor_JDian from './Floor_JDian'
+import Floor_JZheng from './Floor_JZheng'
 
 export default class extends Component {
 
@@ -49,8 +50,10 @@ export default class extends Component {
                                 <Floor houseIntr={this.props.datas.houseIntr}/>
                                 <Floor houseIntr={this.props.datas.secondHouse}/>
                                 <Floor houseIntr={this.props.datas.CZHouse}/>
-                                <Floor_JZ houseMagic={this.props.datas.houseMagic}/>
-                                <Floor_JD houseElectrical={this.props.datas.houseElectrical} />
+                                <Floor_JZhuang houseMagic={this.props.datas.houseMagic}/>
+                                <Floor_JDian houseElectrical={this.props.datas.houseElectrical} />
+                                <Floor_JDian houseElectrical={this.props.datas.houseFurniture} />
+                                <Floor_JZheng houseHeeping={this.props.datas.houseHeeping}/>
                             </View>
                         </ScrollView>
                     </TabBarIOS.Item>

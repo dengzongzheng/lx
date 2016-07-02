@@ -29,7 +29,7 @@ export default class extends Component {
                 <View style={[styles.flex_column,styles.floorTitle]}>
                     <View style={[styles.flex_row,styles.floorHeaderContainer]}>
                         <View style={[styles.flex_row]}>
-                            <Text style={[styles.floorHeader]}>{this.props.houseElectrical.groupName}</Text>
+                            <Text style={[styles.floorHeader]}>{this.props.houseHeeping.groupName}</Text>
                             <View style={[styles.more]}>
                                 <TouchableOpacity >
                                     <Text style={{fontSize:12}}>更多</Text>
@@ -41,36 +41,28 @@ export default class extends Component {
                     </View>
                 </View>
 
-                <View style={[styles.flex_row,{flex:1.5}]}>
-                    <View style={[styles.flex_row]}>
-                        <TouchableOpacity>
-                            <Image source={{uri:this.props.houseElectrical.groupAttrList[0].imgPath}} style={[styles.leftImage]}/>
+                <View style={[styles.flex_row,{flex:2}]}>
+                    <View style={[styles.column,styles.rightBorder]}>
+                        <TouchableOpacity style={[styles.column]}>
+                            <Image source={{uri:this.props.houseHeeping.groupAttrList[0].imgPath}} style={[styles.image]}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.column]}>
+                            <Image source={{uri:this.props.houseHeeping.groupAttrList[1].imgPath}} style={[styles.image]}/>
                         </TouchableOpacity>
                     </View>
-                    <View style={[styles.flex_column,{flex:2}]}>
-                        <View style={[styles.flex_column]}>
-                            <TouchableOpacity style={{borderWidth:Util.pixel,borderColor:"#eee"}}>
-                                <Image source={{uri:this.props.houseElectrical.groupAttrList[1].imgPath}} style={[styles.rightImage1]}/>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={[styles.flex_column,{flexDirection:'row'}]}>
-                            <View style={[styles.flex_column,{flexDirection:'column'}]}>
-                                <TouchableOpacity style={{borderWidth:Util.pixel,borderColor:"#eee"}}>
-                                    <Image source={{uri:this.props.houseElectrical.groupAttrList[2].imgPath}} style={[styles.rightImage_1]}/>
-                                </TouchableOpacity>
-                            </View>
-                            <View style={[styles.flex_column,{flexDirection:'column'}]}>
-                                <TouchableOpacity style={{borderWidth:Util.pixel,borderColor:"#eee"}}>
-                                    <Image source={{uri:this.props.houseElectrical.groupAttrList[3].imgPath}} style={[styles.rightImage_1]}/>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
+                    <View style={[styles.column]}>
+                        <TouchableOpacity style={[styles.row]}>
+                            <Image source={{uri:this.props.houseHeeping.groupAttrList[2].imgPath}} style={[styles.image]}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.row]}>
+                            <Image source={{uri:this.props.houseHeeping.groupAttrList[3].imgPath}} style={[styles.image]}/>
+                        </TouchableOpacity>
                     </View>
                 </View>
 
                 <View style={[styles.flex_column]}>
                     <TouchableOpacity>
-                        <Image source={{uri:this.props.houseElectrical.groupAttrList[4].imgPath}} style={[styles.bottomImage]}/>
+                        <Image source={{uri:this.props.houseHeeping.groupAttrList[4].imgPath}} style={[styles.bottomImage]}/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -117,10 +109,9 @@ const styles = StyleSheet.create({
     leftImage:{
         width:Util.size.width/2,
         height:Util.size.height/2-(2*(Util.size.height/2)/4)+8,
-        resizeMode:'contain',
+        resizeMode:'cover',
         marginRight:3,
-        borderWidth:Util.pixel,
-        borderColor:"#eee"
+        marginBottom:10
     },
     bottomImage:{
         width:Util.size.width,
@@ -130,7 +121,7 @@ const styles = StyleSheet.create({
     rightImage1:{
         width:Util.size.width/2,
         height:(Util.size.height/2)/4+5,
-        resizeMode:'contain',
+        resizeMode:'stretch',
         marginLeft:3
     },
     rightImage2:{
@@ -139,11 +130,16 @@ const styles = StyleSheet.create({
         resizeMode:'cover',
         marginLeft:3
     },
-    rightImage_1:{
-        width:Util.size.width/2/2,
-        height:(Util.size.height/2)/4,
-        resizeMode:'contain',
-        marginLeft:3
+    image:{
+        width:Util.size.width/2-5,
+        height:80,
+        resizeMode:'cover',
+        marginRight:3,
+        marginBottom:10
+    },
+    rightBorder:{
+        borderRightWidth:1,
+        borderRightColor:'#eee'
     }
 
 
