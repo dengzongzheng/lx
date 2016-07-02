@@ -288,7 +288,30 @@ export default class extends Component {
     constructor(props) {
         super(props);
         // 初始状态
-        this.state = {};
+        this.state = {
+            banners:[],
+            tabList:[],
+            newHouseIntr:[],
+            secondHouseIntr:[],
+            rentHouseIntr:[]
+        };
+    }
+
+    componentDidMount() {
+        let url = "http://m.jyall.com/jyshop-deco/v1/shop/decorate/index/INDEX/10002";
+        // fetch(url).then((response)=>{
+        //     if(response.status==200){
+        //         response.json().then(responseData=>{
+        //            this.setState({
+        //                banners:responseData.banner,
+        //                tabList:responseData.tabList,
+        //                newHouseIntr:responseData.houseIntr,
+        //                secondHouseIntr:responseData.secondHouseIntr,
+        //                rentHouseIntr:responseData.CZHouse
+        //            });
+        //         });
+        //     }
+        // });
     }
 
     render(){
@@ -306,13 +329,13 @@ export default class extends Component {
                     >
                         <ScrollView style={[styles.flex_column]}>
                             <View style={[styles.flex_column]}>
-                                <Banner banners={banner.groupAttrList}/>
-                                <TabList tabList={tabList.groupAttrList}/>
+                                <Banner banners={this.state.banner}/>
+                                <TabList tabList={this.state.tabList}/>
                             </View>
                             <View style={[styles.flex_column]}>
-                                <Floor houseIntr={houseIntr}/>
-                                <Floor houseIntr={secondHouse}/>
-                                <Floor houseIntr={CZHouse}/>
+                                <Floor houseIntr={this.state.newHouseIntr}/>
+                                <Floor houseIntr={this.state.secondHouseIntr}/>
+                                <Floor houseIntr={this.state.rentHouseIntr}/>
                             </View>
                         </ScrollView>
                     </TabBarIOS.Item>
