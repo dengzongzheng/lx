@@ -42,8 +42,6 @@ export default class extends Component {
                             <View style={[styles.flex_column]}>
                                 <Banner banners={this.props.datas.banner.groupAttrList}/>
                                 <TabList tabList={this.props.datas.tabList.groupAttrList}/>
-                                <Banner banners={this.state.banner}/>
-                                <TabList tabList={this.state.tabList}/>
                             </View>
                             <View style={[styles.flex_column]}>
                                 <Floor houseIntr={this.props.datas.houseIntr}/>
