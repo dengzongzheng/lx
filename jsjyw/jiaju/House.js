@@ -11,6 +11,8 @@ import {
 import Util from '../Home/Util'
 import Header from './Header'
 import Condition from './Condition'
+import NewHouse from './NewHouse'
+
 
 export default class extends Component {
 
@@ -18,7 +20,9 @@ export default class extends Component {
     constructor(props) {
         super(props);
         // 初始状态
-        this.state = {};
+        this.state = {
+            tab_selected:"NewHouse"
+        };
     }
 
     render(){
@@ -26,6 +30,7 @@ export default class extends Component {
             <View style={[styles.container]}>
                  <Header />
                  <Condition />
+                {this.state.tab_selected=="NewHouse"?<NewHouse />:null}
             </View>
         )
     }
