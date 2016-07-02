@@ -54,6 +54,11 @@ export default class extends Component {
                                 <Floor_JDian houseElectrical={this.props.datas.houseElectrical} />
                                 <Floor_JDian houseElectrical={this.props.datas.houseFurniture} />
                                 <Floor_JZheng houseHeeping={this.props.datas.houseHeeping}/>
+                                <View style={[styles.flex_column]}>
+                                    <TouchableOpacity>
+                                        <Image source={require('../../view/images/lms.jpg')} style={[styles.bottomImage]}/>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </ScrollView>
                     </TabBarIOS.Item>
@@ -89,5 +94,10 @@ const styles = StyleSheet.create({
     },
     tabBar:{
         height:80
+    },
+    bottomImage:{
+        width:Util.size.width,
+        resizeMode:'cover',
+        height:60
     }
 });
