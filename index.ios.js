@@ -38,17 +38,49 @@ class lx2 extends Component{
     constructor(props) {
         super(props);
         // 初始状态
-        this.state = {};
+        this.state = {
+            datas:[],
+            loading:true
+        };
+    }
+
+    componentDidMount() {
+        let url = "http://m.jyall.com/jyshop-deco/v1/shop/decorate/index/INDEX/10002";
+        fetch(url).then((response)=>{
+            if(response.status==200){
+                response.json().then((responseData)=>{
+                    console.log(responseData);
+                   this.setState({
+                       datas:responseData,
+                       loading:false
+                   })
+                })
+            }
+
+        });
+
     }
 
 
     render(){
+
+
+        if(this.state.loading){
+            return (
+                <View style={[styles.loading]}>
+                    <Text>loading............</Text>
+                </View>
+            )
+        }
         return (
             <Navigator
                 style= {styles.container}
                 initialRoute= {{
                   component: Home,
-                  name: 'home'
+                  name: 'home',
+                  params:{
+                     datas:this.state.datas
+                  }
                 }}
                 configureScene={() => {
                     return Navigator.SceneConfigs.HorizontalSwipeJump;
@@ -77,6 +109,11 @@ const styles = StyleSheet.create({
     },
     itemWrapper:{
         backgroundColor: '#f3f3f3'
+    },
+    loading:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center'
     }
 });
 
