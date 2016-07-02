@@ -18,6 +18,7 @@ import Floor from './Floor'
 import Floor_JZhuang from './Floor_JZhuang'
 import Floor_JDian from './Floor_JDian'
 import Floor_JZheng from './Floor_JZheng'
+import House from '../jiaju/House'
 
 export default class extends Component {
 
@@ -26,6 +27,17 @@ export default class extends Component {
         super(props);
         // 初始状态
         this.state = {};
+        this.gotoChannel = this.gotoChannel.bind(this);
+    }
+
+    gotoChannel(name){
+        console.log(name);
+        if(name=="家居"){
+            this.props.navigator.push({
+                component:House,
+                title:''
+            });
+        }
     }
 
     render(){
@@ -44,7 +56,7 @@ export default class extends Component {
                         <ScrollView style={[styles.flex_column]}>
                             <View style={[styles.flex_column]}>
                                 <Banner banners={this.props.datas.banner.groupAttrList}/>
-                                <TabList tabList={this.props.datas.tabList.groupAttrList}/>
+                                <TabList tabList={this.props.datas.tabList.groupAttrList} gotoChannel={this.gotoChannel}/>
                             </View>
                             <View style={[styles.flex_column]}>
                                 <Floor houseIntr={this.props.datas.houseIntr}/>

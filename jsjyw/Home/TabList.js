@@ -10,7 +10,7 @@ import {
 'use strict';
 import Util from './Util'
 import Swiper from 'react-native-swiper';
-
+import House from '../jiaju/House'
 
 export default class extends Component {
 
@@ -19,12 +19,15 @@ export default class extends Component {
         super(props);
         // 初始状态
         this.state = {};
+        this.render = this.render.bind(this);
     }
+    
 
     render(){
+        let that = this;
         let tabLists = this.props.tabList.map(function(elem,index){
             return (
-                <TouchableOpacity key={index} style={styles.flex_row}>
+                <TouchableOpacity key={index} style={styles.flex_row} onPress={()=>that.props.gotoChannel(elem.name)}>
                     <View style={[styles.flex_column]}>
                         <Image source={{uri:elem.imgPath}} style={[styles.tabBox]}/>
                         <Text style={[styles.tabText]}>{elem.name}</Text>

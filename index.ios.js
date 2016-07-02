@@ -14,13 +14,14 @@ import Util from './view/util/Util'
 import Main from './view/Main'
 import Activity from './view/Activity'
 import Home from './jsjyw/Home/Home'
+import House from './jsjyw/jiaju/House'
 class lx extends Component {
     render() {
         return (
             <NavigatorIOS
                 initialRoute={{
                   title:"",
-                  component: Home,
+                  component: House,
                   navigationBarHidden:true
                 }}
                 itemWrapperStyle={styles.itemWrapper}
@@ -40,23 +41,23 @@ class lx2 extends Component{
         // 初始状态
         this.state = {
             datas:[],
-            loading:true
+            loading:false
         };
     }
 
     componentDidMount() {
-        let url = "http://m.jyall.com/jyshop-deco/v1/shop/decorate/index/INDEX/10002";
-        fetch(url).then((response)=>{
-            if(response.status==200){
-                response.json().then((responseData)=>{
-                   this.setState({
-                       datas:responseData,
-                       loading:false
-                   })
-                })
-            }
-
-        });
+        // let url = "http://m.jyall.com/jyshop-deco/v1/shop/decorate/index/INDEX/10002";
+        // fetch(url).then((response)=>{
+        //     if(response.status==200){
+        //         response.json().then((responseData)=>{
+        //            this.setState({
+        //                datas:responseData,
+        //                loading:false
+        //            })
+        //         })
+        //     }
+        //
+        // });
 
     }
 
@@ -75,7 +76,7 @@ class lx2 extends Component{
             <Navigator
                 style= {styles.container}
                 initialRoute= {{
-                  component: Home,
+                  component: House,
                   name: 'home',
                   params:{
                      datas:this.state.datas

@@ -8,7 +8,9 @@ import {
 } from 'react-native'
 
 'use strict';
-import Util from './Util'
+import Util from '../Home/Util'
+import Header from './Header'
+import Condition from './Condition'
 
 export default class extends Component {
 
@@ -22,18 +24,8 @@ export default class extends Component {
     render(){
         return (
             <View style={[styles.container]}>
-                <View>
-                    <Text style={[styles.header_title]}>金色家园网</Text>
-                </View>
-                <TouchableOpacity style={[styles.cityContainer]}>
-                    <View>
-                        <Text>北京市</Text>
-                        <View style={[styles.down]}></View>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.searchContainer]}>
-                    <Image source={require('./images/search/home_search.png')} style={[styles.searchImage]}/>
-                </TouchableOpacity>
+                 <Header />
+                 <Condition />
             </View>
         )
     }
@@ -43,39 +35,7 @@ export default class extends Component {
 const styles = StyleSheet.create({
 
     container:{
-        height:30,
-        marginTop:20,
-        marginBottom:10,
-        marginLeft:10,
-        marginRight:10,
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    header_title:{
-        fontSize:15
-    },
-    searchImage:{
 
-    },
-    searchContainer:{
-        position:'absolute',
-        top:8,
-        right:10
-    },
-    cityContainer:{
-        position:'absolute',
-        top:8,
-        left:10
-    },
-    down:{
-        borderLeftColor:'transparent',
-        borderRightWidth:4,
-        borderRightColor:'transparent',
-        borderTopWidth:5,
-        borderLeftWidth:4,
-        position:'absolute',
-        top:5,
-        left:50
     }
 
 
