@@ -424,7 +424,7 @@ export default class extends Component {
             <View style={[styles.container]}>
                  <Header />
                  <Condition areaClick={this.areaClick} priceClick={this.priceClick} setNewHouseCondition={this.setNewHouseCondition} roomClick={this.roomClick} moreClick={this.moreClick}/>
-                {this.state.tab_selected=="NewHouse"?<View style={{flex:1}}><NewHouse /></View>:null}
+                {this.state.tab_selected=="NewHouse"?<NewHouse />:null}
                 {this.state.areaClick?<Area areaClick={this.areaClick} />:null}
                 {this.state.priceClick?<Price priceClick={this.priceClick} selectPrice={this.selectPrice} prices={this.state.newHouseCondition.prices} />:null}
                 {this.state.roomClick?<Room roomClick={this.roomClick} selectRoom={this.selectRoom} />:null}
@@ -438,6 +438,7 @@ export default class extends Component {
 const styles = StyleSheet.create({
 
     container:{
+        flex:1
     }
 
 

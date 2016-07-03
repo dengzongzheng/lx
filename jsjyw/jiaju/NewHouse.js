@@ -115,7 +115,7 @@ export default class extends Component {
                     style={styles.listView}
                     initialListSize={10}
                     pageSize={10}
-                    
+
                 />
         )
     }
@@ -187,7 +187,6 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     listView:{
-        height:Util.size.height,
         flex:1,
         flexDirection:'column'
     }

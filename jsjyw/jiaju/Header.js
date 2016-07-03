@@ -26,32 +26,35 @@ export default class extends Component {
 
     render() {
         return (
-            <View style={[styles.container,styles.flex_row]}>
-                <View style={[styles.flex_row]}>
-                    <TouchableOpacity  style={[styles.back,styles.flex_row]} onPress={()=>this.goBack()}>
+            <View>
+                <View style={[styles.container,styles.flex_row]}>
+                    <View style={[styles.flex_row]}>
+                        <TouchableOpacity style={[styles.back,styles.flex_row]} onPress={()=>this.goBack()}>
                             <Image source={require("../Home/images/back/back_button.png")}/>
-                    </TouchableOpacity>
-                </View>
-                <View style={[styles.house_tab,styles.flex_row,{flex:3}]}>
-                    <TouchableOpacity style={[styles.flex_row]}>
-                        <Text style={[styles.tab_leftBorder,styles.tab_content,styles.tab_selected,styles.flex_row]}>新房</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.flex_row]}>
-                        <Text style={[styles.tab_content,styles.flex_row]}>二手房</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.flex_row]}>
-                        <Text style={[styles.tab_content,styles.flex_row]}>租房</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={[styles.flex_row,styles.search]}>
-                    <TouchableOpacity style={[styles.flex_row,styles.search]}>
-                        <Image source={require("../Home/images/search/home_search.png")}/>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.flex_row}>
-                    <TouchableOpacity style={styles.flex_row}>
-                        <Image source={require("../Home/images/map/map.png")} style={[styles.map]}/>
-                    </TouchableOpacity>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[styles.house_tab,styles.flex_row,{flex:3}]}>
+                        <TouchableOpacity style={[styles.flex_row]}>
+                            <Text
+                                style={[styles.tab_leftBorder,styles.tab_content,styles.tab_selected,styles.flex_row]}>新房</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.flex_row]}>
+                            <Text style={[styles.tab_content,styles.flex_row]}>二手房</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.flex_row]}>
+                            <Text style={[styles.tab_content,styles.flex_row]}>租房</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[styles.flex_row,styles.search]}>
+                        <TouchableOpacity style={[styles.flex_row,styles.search]}>
+                            <Image source={require("../Home/images/search/home_search.png")}/>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.flex_row}>
+                        <TouchableOpacity style={styles.flex_row}>
+                            <Image source={require("../Home/images/map/map.png")} style={[styles.map]}/>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         )
