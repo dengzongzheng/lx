@@ -287,10 +287,10 @@ class Area extends Component{
         return (
             <View  style={[area.mainContainer,{flexDirection:'column'}]}>
                 <View style={[{flex:1,flexDirection:'row'}]}>
-                    <ScrollView style={[price.contentContainer]}>
+                    <ScrollView style={[price.contentContainer,{flex:0.5,marginLeft:10}]}>
                         <TouchableHighlight underlayColor="#eee">
                             <View style={[price.row]}>
-                                <Text style={[price.row_text,price.select_text]}>全部</Text>
+                                <Text style={[price.row_text,price.select_text]}>不限</Text>
                             </View>
                         </TouchableHighlight>
                         {countries}
@@ -328,11 +328,11 @@ class Biz extends Component{
         });
 
         return (
-            <View style={[biz.contentContainer,{flex:1,flexDirection:'row'}]}>
+            <View style={[biz.contentContainer,{flex:1,flexDirection:'row',paddingLeft:10}]}>
                 <ScrollView style={[price.contentContainer]}>
                     <TouchableHighlight underlayColor="#eee">
                         <View style={[price.row]}>
-                            <Text style={[price.row_text,price.select_text]}>全部</Text>
+                            <Text style={[price.row_text,price.select_text]}>不限</Text>
                         </View>
                     </TouchableHighlight>
                     {bizs}
@@ -554,7 +554,7 @@ const biz = StyleSheet.create({
     },
     contentContainer:{
         width:Util.size.width,
-        backgroundColor:'#eee',
+        backgroundColor:'#fff',
         flex:1,
         borderLeftColor:'#eee',
         borderLeftWidth:Util.pixel*2
