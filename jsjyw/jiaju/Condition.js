@@ -49,11 +49,11 @@ export default class extends Component {
                    <Text>均价</Text>
                    <View style={[styles.down]}></View>
                </TouchableOpacity>
-               <TouchableOpacity style={[styles.flex_row,styles.condition_content]}>
+               <TouchableOpacity style={[styles.flex_row,styles.condition_content]} onPress={()=>this.props.roomClick()}>
                    <Text>户型</Text>
                    <View style={[styles.down]}></View>
                </TouchableOpacity>
-               <TouchableOpacity style={[styles.flex_row,styles.condition_content]}>
+               <TouchableOpacity style={[styles.flex_row,styles.condition_content]} onPress={()=>this.props.moreClick()}>
                    <Text>更多</Text>
                    <View style={[styles.down]}></View>
                </TouchableOpacity>
