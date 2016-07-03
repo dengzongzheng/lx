@@ -10,13 +10,16 @@ import {
 'use strict';
 import Util from '../Home/Util'
 
+
 export default class extends Component {
 
     // 构造
     constructor(props) {
         super(props);
         // 初始状态
-        this.state = {};
+        this.state = {
+        };
+        this.render = this.render.bind(this);
     }
 
     render() {
@@ -26,7 +29,7 @@ export default class extends Component {
                    <Text style={[styles.condition_text]}>区域</Text>
                    <View style={[styles.down]}></View>
                </TouchableOpacity>
-               <TouchableOpacity style={[styles.flex_row,styles.condition_content]}>
+               <TouchableOpacity style={[styles.flex_row,styles.condition_content]} onPress={()=>this.props.priceClick()}>
                    <Text>均价</Text>
                    <View style={[styles.down]}></View>
                </TouchableOpacity>
@@ -79,3 +82,4 @@ const styles = StyleSheet.create({
     }
 
 });
+
