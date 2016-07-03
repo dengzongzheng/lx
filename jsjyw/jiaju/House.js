@@ -377,18 +377,23 @@ export default class extends Component {
 
     priceClick(){
         this.setState({
-            priceClick:!this.state.priceClick
+            priceClick:!this.state.priceClick,
+            roomClick:false,
+            moreClick:false,
+            areaClick:false
         });
     }
 
     selectPrice(startAmounts,endAmounts){
-       alert(endAmounts);
        this.priceClick()
     }
 
     roomClick(){
         this.setState({
-            roomClick:!this.state.roomClick
+            roomClick:!this.state.roomClick,
+            priceClick:false,
+            moreClick:false,
+            areaClick:false
         });
     }
 
@@ -398,13 +403,19 @@ export default class extends Component {
 
     moreClick(){
         this.setState({
-            moreClick:!this.state.moreClick
+            moreClick:!this.state.moreClick,
+            roomClick:false,
+            priceClick:false,
+            areaClick:false
         });
     }
 
     areaClick(){
         this.setState({
-            areaClick:!this.state.areaClick
+            areaClick:!this.state.areaClick,
+            moreClick:false,
+            roomClick:false,
+            priceClick:false
         });
     }
 

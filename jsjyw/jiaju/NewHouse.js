@@ -35,6 +35,7 @@ export default class extends Component {
 
     getDatas(){
         const url = "http://m.jyall.com/jyhouse-api/v1/newHouse/getHouses?cityId=10002&pageSize=10&pageNo="+this.state.pageNo;
+        console.log(url);
         fetch(url).then((response)=>{
             if(response.status==200){
                 response.json().then((responseData)=>{
@@ -114,8 +115,7 @@ export default class extends Component {
                     style={styles.listView}
                     initialListSize={10}
                     pageSize={10}
-                    onEndReachedThreshold={1}
-                    onEndReached={this.getDatas()}
+                    
                 />
         )
     }
