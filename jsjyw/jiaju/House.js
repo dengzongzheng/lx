@@ -363,6 +363,7 @@ export default class extends Component {
         this.selectRoom = this.selectRoom.bind(this);
         this.moreClick = this.moreClick.bind(this);
         this.areaClick =  this.areaClick.bind(this);
+        this.goBack = this.goBack.bind(this);
     }
 
     componentDidMount() {
@@ -419,10 +420,14 @@ export default class extends Component {
         });
     }
 
+    goBack(){
+        this.props.navigator.pop();
+    }
+    
     render(){
         return (
             <View style={[styles.container]}>
-                 <Header />
+                 <Header goBack={this.goBack}/>
                  <Condition areaClick={this.areaClick} priceClick={this.priceClick} setNewHouseCondition={this.setNewHouseCondition} roomClick={this.roomClick} moreClick={this.moreClick}/>
                 {this.state.tab_selected=="NewHouse"?<NewHouse />:null}
                 {this.state.areaClick?<Area areaClick={this.areaClick} />:null}

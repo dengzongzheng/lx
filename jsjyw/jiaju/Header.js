@@ -17,11 +17,6 @@ export default class extends Component {
         super(props);
         // 初始状态
         this.state = {};
-        this.goBack = this.goBack.bind(this);
-    }
-
-    goBack(){
-        this.props.navigator.pop();
     }
 
     render() {
@@ -29,7 +24,7 @@ export default class extends Component {
             <View>
                 <View style={[styles.container,styles.flex_row]}>
                     <View style={[styles.flex_row]}>
-                        <TouchableOpacity style={[styles.back,styles.flex_row]} onPress={()=>this.goBack()}>
+                        <TouchableOpacity style={[styles.back,styles.flex_row]} onPress={()=>this.props.goBack()}>
                             <Image source={require("../Home/images/back/back_button.png")}/>
                         </TouchableOpacity>
                     </View>

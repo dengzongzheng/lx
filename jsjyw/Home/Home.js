@@ -28,6 +28,7 @@ export default class extends Component {
         // 初始状态
         this.state = {};
         this.gotoChannel = this.gotoChannel.bind(this);
+        this.render = this.render.bind(this);
     }
 
     gotoChannel(name){

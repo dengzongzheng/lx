@@ -41,23 +41,23 @@ class lx2 extends Component{
         // 初始状态
         this.state = {
             datas:[],
-            loading:false
+            loading:true
         };
     }
 
     componentDidMount() {
-        // let url = "http://m.jyall.com/jyshop-deco/v1/shop/decorate/index/INDEX/10002";
-        // fetch(url).then((response)=>{
-        //     if(response.status==200){
-        //         response.json().then((responseData)=>{
-        //            this.setState({
-        //                datas:responseData,
-        //                loading:false
-        //            })
-        //         })
-        //     }
-        //
-        // });
+        let url = "http://m.jyall.com/jyshop-deco/v1/shop/decorate/index/INDEX/10002";
+        fetch(url).then((response)=>{
+            if(response.status==200){
+                response.json().then((responseData)=>{
+                   this.setState({
+                       datas:responseData,
+                       loading:false
+                   })
+                })
+            }
+
+        });
 
     }
 
@@ -76,7 +76,7 @@ class lx2 extends Component{
             <Navigator
                 style= {styles.container}
                 initialRoute= {{
-                  component: House,
+                  component: Home,
                   name: 'home',
                   params:{
                      datas:this.state.datas
