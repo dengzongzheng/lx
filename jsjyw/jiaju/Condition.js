@@ -4,7 +4,8 @@ import {
     StyleSheet,
     Text,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    AsyncStorage
 } from 'react-native'
 
 'use strict';
@@ -20,6 +21,21 @@ export default class extends Component {
         this.state = {
         };
         this.render = this.render.bind(this);
+    }
+
+    getConditions(){
+        let url = "http://m.jyall.com/jyhouse-api/v1/basicCondition/getNewHouseCondition?cityId=10002";
+        fetch(url).then((response)=>{
+            if(response.status==200){
+                response.json().then((responseData)=>{
+                    this.props.setNewHouseCondition(responseData);
+                });
+            }
+        })
+    }
+
+    componentDidMount() {
+        this.getConditions();
     }
 
     render() {

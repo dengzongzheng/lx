@@ -6,7 +6,8 @@ import {
     Image,
     TouchableOpacity,
     ScrollView,
-    TouchableHighlight
+    TouchableHighlight,
+    AsyncStorage
 } from 'react-native'
 
 'use strict';
@@ -22,38 +23,33 @@ class Price extends Component{
     constructor(props) {
         super(props);
         // 初始状态
-        this.state = {};
+        this.state = {
+
+        };
+        this.render = this.render.bind(this);
+    }
+
+    componentWillMount() {
+
     }
 
     render(){
+
+        var prices = this.props.prices.data.map((elem,index)=>{
+
+            return(
+                <TouchableHighlight underlayColor="#eee" onPress={()=>this.props.selectPrice(elem.startAmounts,elem.endAmounts)} key={index}>
+                    <View style={[price.row]}>
+                        <Text style={[price.row_text,price.select_text]}>{elem.text}</Text>
+                    </View>
+                </TouchableHighlight>
+            )
+        });
+
         return (
             <View  style={[price.mainContainer]}>
                 <ScrollView style={[price.contentContainer]}>
-                    <TouchableHighlight underlayColor="#eee">
-                        <View style={[price.row]}>
-                            <Text style={[price.row_text,price.select_text]}>全部</Text>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight>
-                        <View style={[price.row]}>
-                            <Text style={[price.row_text,price.select_text]}>全部</Text>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight>
-                        <View style={[price.row]}>
-                            <Text style={[price.row_text,price.select_text]}>全部</Text>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight>
-                        <View style={[price.row]}>
-                            <Text style={[price.row_text,price.select_text]}>全部</Text>
-                        </View>
-                    </TouchableHighlight>
-                    <TouchableHighlight>
-                        <View style={[price.row]}>
-                            <Text style={[price.row_text,price.select_text]}>全部</Text>
-                        </View>
-                    </TouchableHighlight>
+                    {prices}
                 </ScrollView>
                 <TouchableHighlight onPress={()=>this.props.priceClick()} style={[price.container]}>
                     <View></View>
@@ -71,9 +67,22 @@ export default class extends Component {
         // 初始状态
         this.state = {
             tab_selected:"NewHouse",
-            priceClick:true
+            priceClick:false,
+            newHouseCondition:[]
         };
         this.priceClick = this.priceClick.bind(this);
+        this.selectPrice = this.selectPrice.bind(this);
+        this.setNewHouseCondition = this.setNewHouseCondition.bind(this);
+    }
+
+    componentDidMount() {
+
+    }
+
+    setNewHouseCondition(newHouseCondition){
+        this.setState({
+            newHouseCondition:newHouseCondition
+        })
     }
 
     priceClick(){
@@ -81,14 +90,18 @@ export default class extends Component {
             priceClick:!this.state.priceClick
         });
     }
-    
+
+    selectPrice(startAmounts,endAmounts){
+       alert(endAmounts);
+    }
+
     render(){
         return (
             <View style={[styles.container]}>
                  <Header />
-                 <Condition priceClick={this.priceClick}/>
+                 <Condition priceClick={this.priceClick} setNewHouseCondition={this.setNewHouseCondition}/>
                 {this.state.tab_selected=="NewHouse"?<View style={{flex:1}}><NewHouse /></View>:null}
-                {this.state.priceClick?<Price priceClick={this.priceClick}/>:null}
+                {this.state.priceClick?<Price priceClick={this.priceClick} selectPrice={this.selectPrice} prices={this.state.newHouseCondition.prices} />:null}
             </View>
         )
     }
