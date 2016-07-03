@@ -21,7 +21,9 @@ export default class extends Component {
         // 初始状态
         this.state = {
             dataSource:dataSource,
-            loading:true
+            newHouses:[],
+            loading:true,
+            pageNo:1
         };
         this.goBack = this.goBack.bind(this);
         this.renderRow = this.renderRow.bind(this);
@@ -31,19 +33,25 @@ export default class extends Component {
         this.props.navigator.pop();
     }
 
-    componentDidMount() {
-        const url = "http://m.jyall.com/jyhouse-api/v1/newHouse/getHouses?cityId=10002&pageSize=10&pageNo=1";
+    getDatas(){
+        const url = "http://m.jyall.com/jyhouse-api/v1/newHouse/getHouses?cityId=10002&pageSize=10&pageNo="+this.state.pageNo;
         fetch(url).then((response)=>{
-           if(response.status==200){
-               response.json().then((responseData)=>{
-                   console.log(responseData.data);
-                  this.setState({
-                      dataSource:this.state.dataSource.cloneWithRows(responseData.data),
-                      loading:false
-                  });
-               });
-           }
+            if(response.status==200){
+                response.json().then((responseData)=>{
+                    let data = this.state.newHouses.concat(responseData.data);
+                    this.setState({
+                        dataSource:this.state.dataSource.cloneWithRows(data),
+                        loading:false,
+                        newHouses:data,
+                        pageNo:this.state.pageNo+1
+                    });
+                });
+            }
         });
+    }
+
+    componentDidMount() {
+        this.getDatas();
     }
 
     renderRow (renderData){
@@ -65,7 +73,7 @@ export default class extends Component {
                     <View style={[styles.flex_column]}>
                         <View style={[styles.flex_row]}>
                             <View style={[styles.flex_row]}>
-                                <Text style={styles.title} numberOfLines={1}>{renderData.title}</Text>
+                                <Text style={[styles.title,styles.flex_row]} numberOfLines={1}>{renderData.title}</Text>
                             </View>
                             <View style={[styles.flex_row]}>
                                 <Text style={[styles.price]}>{renderData.averagePrice}元/㎡</Text>
@@ -73,10 +81,10 @@ export default class extends Component {
                         </View>
                         <View style={[styles.flex_row]}>
                             <View style={[styles.flex_row]}>
-                                <Text style={styles.position} numberOfLines={1}>{renderData.position}</Text>
+                                <Text style={[styles.position,styles.flex_row]} numberOfLines={1}>{renderData.position}</Text>
                             </View>
                             <View style={[styles.flex_row]}>
-                                <Text style={[styles.area]}>{renderData.area}㎡</Text>
+                                <Text style={[styles.area,styles.flex_row]}>{renderData.area}㎡</Text>
                             </View>
                         </View>
                         <View style={[styles.flex_row]}>
@@ -104,6 +112,10 @@ export default class extends Component {
                     dataSource={this.state.dataSource}
                     renderRow={this.renderRow}
                     style={styles.listView}
+                    initialListSize={10}
+                    pageSize={10}
+                    onEndReachedThreshold={1}
+                    onEndReached={this.getDatas()}
                 />
         )
     }
@@ -137,28 +149,18 @@ const styles = StyleSheet.create({
     },
     title:{
         fontSize:15,
-        textAlign:'center',
-        justifyContent:'center',
-        alignItems:'center'
     },
     price:{
         fontSize:11,
-        textAlign:'center',
         justifyContent:'center',
         alignItems:'flex-start',
         color:'red'
     },
     position:{
-        fontSize:15,
-        textAlign:'center',
-        justifyContent:'center',
-        alignItems:'center'
+        fontSize:13,
     },
     area:{
         fontSize:11,
-        textAlign:'center',
-        justifyContent:'center',
-        alignItems:'center'
     },
     tag:{
         height:20,
@@ -185,7 +187,9 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     listView:{
-        height:Util.size.height
+        height:Util.size.height,
+        flex:1,
+        flexDirection:'column'
     }
 
 });
