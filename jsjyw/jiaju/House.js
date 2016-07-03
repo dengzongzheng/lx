@@ -220,6 +220,128 @@ class More extends Component{
     }
 }
 
+class Area extends Component{
+
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+           countrySelect:false,
+           countryData:[],
+           bizData:[]
+        };
+        this.render = this.render.bind(this);
+    }
+
+    getCountries(){
+        let url = "http://m.jyall.com/jyhouse-api/v1/common/getCountys?cityId=10002";
+        fetch(url).then((response)=>{
+            if(response.status==200){
+                response.json().then((responseData)=>{
+                    console.log(responseData);
+                    this.setState({
+                        countryData:responseData.data,
+                        countrySelect:false
+                    })
+                });
+            }
+        });
+    }
+
+    getBiz(countryId){
+        console.log(countryId);
+        if(0!==countryId){
+            let url = "http://m.jyall.com/jyhouse-api/v1/common/getBizs?countyId="+countryId;
+            fetch(url).then((response)=>{
+                if(response.status==200){
+                    response.json().then((responseData)=>{
+                        console.log(responseData);
+                        this.setState({
+                            bizData:responseData.data,
+                            countrySelect:true
+                        })
+                    });
+                }
+            });
+        }
+    }
+
+    componentDidMount() {
+        this.getCountries();
+    }
+
+    render(){
+
+        var countries = this.state.countryData.map((elem,index)=>{
+
+            return(
+                <TouchableOpacity underlayColor="#eee" key={index} onPress={()=>this.getBiz(elem.countryId)}>
+                    <View style={[price.row]}>
+                        <Text style={[price.row_text]}>{elem.countryName}</Text>
+                    </View>
+                </TouchableOpacity>
+            )
+        });
+
+        return (
+            <View  style={[area.mainContainer,{flexDirection:'column'}]}>
+                <View style={[{flex:1,flexDirection:'row'}]}>
+                    <ScrollView style={[price.contentContainer]}>
+                        <TouchableHighlight underlayColor="#eee">
+                            <View style={[price.row]}>
+                                <Text style={[price.row_text,price.select_text]}>全部</Text>
+                            </View>
+                        </TouchableHighlight>
+                        {countries}
+                    </ScrollView>
+                    {this.state.countrySelect ? <Biz bizData={this.state.bizData}/> : null}
+                </View>
+                <TouchableHighlight onPress={()=>this.props.areaClick()} style={[price.container]}>
+                    <View></View>
+                </TouchableHighlight>
+            </View>
+        );
+
+    }
+}
+
+class Biz extends Component{
+
+    // 构造
+    constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {};
+    }
+
+    render(){
+
+        let bizs = this.props.bizData.map((elem,index)=>{
+            return (
+                <TouchableHighlight underlayColor="#eee" key={index}>
+                    <View style={[price.row]}>
+                        <Text style={[price.row_text]}>{elem.businessDistrictName}</Text>
+                    </View>
+                </TouchableHighlight>
+            )
+        });
+
+        return (
+            <View style={[biz.contentContainer,{flex:1,flexDirection:'row'}]}>
+                <ScrollView style={[price.contentContainer]}>
+                    <TouchableHighlight underlayColor="#eee">
+                        <View style={[price.row]}>
+                            <Text style={[price.row_text,price.select_text]}>全部</Text>
+                        </View>
+                    </TouchableHighlight>
+                    {bizs}
+                </ScrollView>
+            </View>
+        );
+    }
+}
+
 export default class extends Component {
 
     // 构造
@@ -231,7 +353,8 @@ export default class extends Component {
             priceClick:false,
             newHouseCondition:[],
             roomClick:false,
-            moreClick:false
+            moreClick:false,
+            areaClick:false
         };
         this.priceClick = this.priceClick.bind(this);
         this.selectPrice = this.selectPrice.bind(this);
@@ -239,6 +362,7 @@ export default class extends Component {
         this.roomClick = this.roomClick.bind(this);
         this.selectRoom = this.selectRoom.bind(this);
         this.moreClick = this.moreClick.bind(this);
+        this.areaClick =  this.areaClick.bind(this);
     }
 
     componentDidMount() {
@@ -277,12 +401,20 @@ export default class extends Component {
             moreClick:!this.state.moreClick
         });
     }
+
+    areaClick(){
+        this.setState({
+            areaClick:!this.state.areaClick
+        });
+    }
+
     render(){
         return (
             <View style={[styles.container]}>
                  <Header />
-                 <Condition priceClick={this.priceClick} setNewHouseCondition={this.setNewHouseCondition} roomClick={this.roomClick} moreClick={this.moreClick}/>
+                 <Condition areaClick={this.areaClick} priceClick={this.priceClick} setNewHouseCondition={this.setNewHouseCondition} roomClick={this.roomClick} moreClick={this.moreClick}/>
                 {this.state.tab_selected=="NewHouse"?<View style={{flex:1}}><NewHouse /></View>:null}
+                {this.state.areaClick?<Area areaClick={this.areaClick} />:null}
                 {this.state.priceClick?<Price priceClick={this.priceClick} selectPrice={this.selectPrice} prices={this.state.newHouseCondition.prices} />:null}
                 {this.state.roomClick?<Room roomClick={this.roomClick} selectRoom={this.selectRoom} />:null}
                 {this.state.moreClick?<More tags={this.state.newHouseCondition.tags} />:null}
@@ -395,4 +527,37 @@ const more = StyleSheet.create({
     button_text:{
         color:'white'
     }
+});
+
+const area = StyleSheet.create({
+    mainContainer:{
+        flex:1,
+        height:Util.size.height-40,
+        width:Util.size.width,
+        position:'absolute',
+        top:80,
+        left:0,
+        flexDirection:'column'
+    },
+
+});
+const biz = StyleSheet.create({
+    mainContainer:{
+        flex:1,
+        height:Util.size.height-40,
+        width:Util.size.width,
+        position:'absolute',
+        top:80,
+        left:0,
+        flexDirection:'column',
+
+    },
+    contentContainer:{
+        width:Util.size.width,
+        backgroundColor:'#eee',
+        flex:1,
+        borderLeftColor:'#eee',
+        borderLeftWidth:Util.pixel*2
+    },
+
 });

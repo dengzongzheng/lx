@@ -41,7 +41,7 @@ export default class extends Component {
     render() {
         return (
            <View style={[styles.container]}>
-               <TouchableOpacity style={[styles.flex_row,styles.condition_content]}>
+               <TouchableOpacity style={[styles.flex_row,styles.condition_content]} onPress={()=>this.props.areaClick()}>
                    <Text style={[styles.condition_text]}>区域</Text>
                    <View style={[styles.down]}></View>
                </TouchableOpacity>
